@@ -25,6 +25,10 @@ a {
     margin: 50px auto;
     padding: 20px;
 }
+#progress-container {
+    text-align: center;
+    visibility: hidden;
+}
 #drop-area.highlight {
     border-color: purple;
 }
@@ -34,10 +38,10 @@ p {
 .my-form {
     margin-bottom: 10px;
 }
-#gallery {
+#preview {
     margin-top: 10px;
 }
-#gallery img {
+#preview img {
     width: 150px;
     margin-bottom: 10px;
     margin-right: 10px;

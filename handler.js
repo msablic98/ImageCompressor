@@ -57,6 +57,26 @@ function uploadData(files) {
 
     // AJAX request
     $.ajax({
+        xhr: function() {
+            let xhr = new window.XMLHttpRequest();
+            let progressBar = document.getElementById('progress-bar');
+            progressBar.style.visibility = 'visible';
+            xhr.upload.addEventListener("progress", function(evt) {
+                if (evt.lengthComputable) {
+                    var percentComplete = evt.loaded / evt.total;
+                    percentComplete = parseInt(percentComplete * 100);
+                    progressBar.value = percentComplete;
+
+                    if (percentComplete === 100) {
+                        progressBar.value = 0;
+                        progressBar.style.visibility = 'hidden';
+                    }
+
+                }
+            }, false);
+
+            return xhr;
+        },
         url: 'upload.php',
         type: 'post',
         data: form_data,
@@ -76,7 +96,7 @@ function uploadData(files) {
                     '/webp:' + webp +
                     '/w:' + width +
                     '/url:' + src +
-                    '" width="200px;" height="200px">');
+                    '">');
             }
         }
     });
