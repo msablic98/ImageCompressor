@@ -5,30 +5,29 @@
     <title>Image compressor</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="handler.js"></script>
-    <style type="text/css">
-        #preview img{
-            margin: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<form method='post' action='' enctype="multipart/form-data">
-
+<div id = "quality-radio">
     <p>Quality:</p>
     <input type="radio" id="intelligent" name="quality" value="intelligent" required checked>
     <label for="intelligent">Intelligent</label><br>
     <input type="radio" id="lossless" name="quality" value="lossless">
     <label for="lossless">Lossless</label><br>
+</div>
 
-    <input type="file" id='files' name="files[]" multiple><br>
+<div id="drop-area">
 
-    <input type="button" id="submit" value='Upload'>
+    <form class="my-form">
+        <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+        <input type="file" id="fileElem" multiple accept="image/*" onchange="uploadData(this.files)">
+        <label class="button" for="fileElem">Select some files</label>
+    </form>
 
-</form>
+    <div id="preview" /></div>
+</div>
 
-<!-- Preview -->
-<div id='preview'></div>
 
 </body>
 </html>
