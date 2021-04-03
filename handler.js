@@ -77,10 +77,8 @@ $(document).ready(function() {
                         '/url:' + src +
                         '" width="200px;" height="200px">');
                 }
-
             }
         });
-
     };
 
 });

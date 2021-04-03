@@ -2,6 +2,10 @@
 // Count total files
 $countfiles = count($_FILES['files']['name']);
 
+if (!file_exists('uploads/')) {
+    mkdir('uploads/', 0777, true);
+}
+
 // Upload directory
 $upload_location = "uploads/";
 
