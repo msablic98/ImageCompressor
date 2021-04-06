@@ -18,9 +18,10 @@ for($index = 0;$index < $countfiles;$index++){
     if(isset($_FILES['files']['name'][$index]) && $_FILES['files']['name'][$index] != ''){
         // File name
         $filename = $_FILES['files']['name'][$index];
+        $trimmedFilename = preg_replace('/\s+/', '', $filename);
 
         // Get extension
-        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $ext = strtolower(pathinfo($trimmedFilename, PATHINFO_EXTENSION));
 
         // Valid image extension
         $valid_ext = array("png","jpeg","jpg");
@@ -29,7 +30,7 @@ for($index = 0;$index < $countfiles;$index++){
         if(in_array($ext, $valid_ext)){
 
             // File path
-            $path = $upload_location.$filename;
+            $path = $upload_location.$trimmedFilename;
 
             // Upload file
             if(move_uploaded_file($_FILES['files']['tmp_name'][$index],$path)){

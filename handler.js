@@ -42,10 +42,10 @@ $(document).ready(function() {
 
 function uploadData(files) {
 
-    let url = 'https://cdn.zapwp.net';
+    let url = 'https://frankfurt.zapwp.net';
     let key = '51f0429e31298bf7461bed0a35589cb68d1babce';
     let retina = 'true';
-    let webp = 'true';
+    let webp = 'false';
     let width = '1';
     let quality = $('input[name="quality"]:checked').val();
 
@@ -74,7 +74,6 @@ function uploadData(files) {
 
                 }
             }, false);
-
             return xhr;
         },
         url: 'upload.php',
@@ -84,19 +83,27 @@ function uploadData(files) {
         contentType: false,
         processData: false,
         success: function (response) {
-
-            for (var index = 0; index < response.length; index++) {
-                var src = response[index];
-
-                // Add img element in <div id='preview'>
-                $('#preview').append('<img src="' + url +
+            for (let index = 0; index < response.length; index++) {
+                let src = response[index];
+                let apiFullURL = url +
+                    '/info:true' +
                     '/key:' + key +
                     '/q:' + quality +
                     '/retina:' + retina +
                     '/webp:' + webp +
                     '/w:' + width +
-                    '/url:' + src +
-                    '">');
+                    '/url:' + src;
+
+                $.getJSON(apiFullURL, function(response) {
+                    let imgUrl = response.data.img_url;
+                    let before = response.data.before;
+                    let after = response.data.after;
+
+                    // Add img element in <div id='preview'>
+                    $('#preview').append('<div><img src="' + imgUrl + '"><br>'
+                    + '<span>Size before: ' + before + ' B</span><br>'
+                    + '<span>Size after: ' + after + ' B</span></div>');
+                });
             }
         }
     });
